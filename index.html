@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmixolStars — Покупка звёзд Telegram</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --primary: #ffd700;
+            --primary-dim: #b8960b;
+            --text: #ffffff;
+            --text-secondary: #8a8a9a;
+            --border: #2a2a3a;
+            --gradient: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 25px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-btn {
+            background: var(--gradient);
+            color: #000;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .header-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .prices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .price-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary-dim);
+            transform: translateY(-5px);
+        }
+
+        .price-card .stars {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .price-card .stars-icon {
+            color: var(--primary);
+        }
+
+        .price-card .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .price-card .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .section {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section h2 .icon {
+            font-size: 1.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .info-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .info-card p, .info-card ul {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-card a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+
+        .legal-text {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .legal-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .legal-text p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .legal-text ol {
+            color: var(--text-secondary);
+            padding-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        .legal-text ol li {
+            margin-bottom: 12px;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .contact-item .icon {
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-item .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-item .value {
+            font-weight: 600;
+        }
+
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+        .requisites {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .requisites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .requisite-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .requisite-item:last-child {
+            border-bottom: none;
+        }
+
+        .requisite-item .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .requisite-item .value {
+            font-weight: 500;
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .prices-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">⭐</span>
+                    <span>AmixolStars</span>
+                </div>
+                <a href="https://t.me/amixolstarsbot" class="header-btn">Открыть бота</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Покупка <span>звёзд Telegram</span></h1>
+            <p>Быстро, безопасно и по выгодной цене. Оплата картой, моментальная доставка на ваш аккаунт.</p>
+
+            <div class="prices-grid">
+                <div class="price-card">
+                    <div class="stars"><span class="stars-icon">⭐</span> 50</div>
+                    <div class="label">звёзд</div>
+                    <div class="price">75 ₽</div>
+                </div>
+                <div class="price-card">
+                    <div class="stars"><span class="stars-icon">⭐</span> 100</div>
+                    <div class="label">звёзд</div>
+                    <div class="price">150 ₽</div>
+                </div>
+                <div class="price-card">
+                    <div class="stars"><span class="stars-icon">⭐</span> 500</div>
+                    <div class="label">звёзд</div>
+                    <div class="price">750 ₽</div>
+                </div>
+                <div class="price-card">
+                    <div class="stars"><span class="stars-icon">⭐</span> 1000</div>
+                    <div class="label">звёзд</div>
+                    <div class="price">1 500 ₽</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+            <h2><span class="icon">📋</span> Описание услуги</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Что такое звёзды Telegram?</h3>
+                    <p>Звёзды Telegram — это внутренняя валюта мессенджера, которая используется для поддержки авторов каналов, оплаты подписок и покупки цифрового контента.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Как это работает?</h3>
+                    <ul>
+                        <li>1. Выберите количество звёзд</li>
+                        <li>2. Укажите username получателя</li>
+                        <li>3. Оплатите заказ картой</li>
+                        <li>4. Звёзды мгновенно поступят на счёт</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Цены</h3>
+                    <ul>
+                        <li>50 звёзд — 75 ₽</li>
+                        <li>100 звёзд — 150 ₽</li>
+                        <li>250 звёзд — 375 ₽</li>
+                        <li>500 звёзд — 750 ₽</li>
+                        <li>1000 звёзд — 1 500 ₽</li>
+                        <li>Любое количество от 50 до 10 000</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="terms">
+        <div class="container">
+            <h2><span class="icon">📜</span> Условия предоставления услуг</h2>
+
+            <div class="legal-text">
+                <h3>1. Общие положения</h3>
+                <p>Настоящий документ определяет условия предоставления услуг по продаже звёзд Telegram через сервис AmixolStars.</p>
+                <p>Оформляя заказ, вы подтверждаете согласие с данными условиями.</p>
+            </div>
+
+            <div class="legal-text">
+                <h3>2. Порядок оказания услуг</h3>
+                <ol>
+                    <li>Услуга считается оказанной с момента зачисления звёзд на аккаунт получателя в Telegram.</li>
+                    <li>Срок оказания услуги — до 24 часов с момента оплаты. В большинстве случаев звёзды зачисляются мгновенно.</li>
+                    <li>Для получения услуги необходимо указать корректный username Telegram получателя.</li>
+                    <li>Покупатель несёт ответственность за правильность указанных данных.</li>
+                </ol>
+            </div>
+
+            <div class="legal-text">
+                <h3>3. Возврат и отказ от услуги</h3>
+                <ol>
+                    <li>Возврат денежных средств возможен до момента зачисления звёзд на аккаунт получателя.</li>
+                    <li>После успешного зачисления звёзд возврат невозможен, так как услуга считается полностью оказанной.</li>
+                    <li>В случае технической невозможности оказания услуги (неверный username, заблокированный аккаунт) денежные средства возвращаются в полном объёме в течение 3 рабочих дней.</li>
+                    <li>Для оформления возврата свяжитесь с поддержкой через Telegram-бота или по email.</li>
+                </ol>
+            </div>
+
+            <div class="legal-text">
+                <h3>4. Ограничение ответственности</h3>
+                <ol>
+                    <li>Сервис не несёт ответственности за действия третьих лиц (Telegram, платёжные системы).</li>
+                    <li>Сервис не несёт ответственности за убытки, связанные с неправильно указанными данными покупателем.</li>
+                    <li>Максимальная ответственность сервиса ограничена суммой оплаченного заказа.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contacts">
+        <div class="container">
+            <h2><span class="icon">📞</span> Контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-item">
+                    <div class="icon">💬</div>
+                    <div>
+                        <div class="label">Telegram-бот</div>
+                        <div class="value"><a href="https://t.me/amixolstarsbot">@amixolstarsbot</a></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">✉️</div>
+                    <div>
+                        <div class="label">Email</div>
+                        <div class="value"><a href="mailto:amixolplex@gmail.com">amixolplex@gmail.com</a></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">👤</div>
+                    <div>
+                        <div class="label">Поддержка</div>
+                        <div class="value"><a href="https://t.me/freetheless">@freetheless</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="requisites">
+        <div class="container">
+            <h2><span class="icon">🏢</span> Реквизиты</h2>
+            <div class="requisites">
+                <div class="requisites-grid">
+                    <div class="requisite-item">
+                        <div class="label">Статус</div>
+                        <div class="value">Самозанятый</div>
+                    </div>
+                    <div class="requisite-item">
+                        <div class="label">ФИО</div>
+                        <div class="value">Диденко Владимир Алексеевич</div>
+                    </div>
+                    <div class="requisite-item">
+                        <div class="label">ИНН</div>
+                        <div class="value">301314292266</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 AmixolStars. Все права защищены.</p>
+            <p style="margin-top: 10px;">Оплата производится через сервис Robokassa</p>
+        </div>
+    </footer>
+</body>
+</html>
